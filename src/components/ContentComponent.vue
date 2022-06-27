@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { reactive, onBeforeMount } from 'vue'
+import { reactive } from 'vue'
 import { loginToWaves, callTransaction } from '@/utils/signerWaves'
 import { generateScriptWavesTransaction } from '@/utils/generateScript'
 
@@ -55,18 +55,7 @@ export default {
       callTransaction(dataGeneratedScript)
     }
 
-    onBeforeMount(() => {
-      getBTC()
-    })
-
-    async function getBTC() {
-      fetch(
-        'https://api.nomics.com/v1/currencies/ticker?key=your-key-here&ids=BTC,ETH,XRP&interval=1d,30d&convert=USD&platform-currency=BTC&per-page=100&page=1'
-      )
-        .then((response) => response.json())
-        .then((data) => console.log(data))
-    }
-    return { user, handleClickConnectWallet, handleClickGenerateScript, handleTransaction, getBTC }
+    return { user, handleClickConnectWallet, handleClickGenerateScript, handleTransaction }
   }
 }
 </script>
