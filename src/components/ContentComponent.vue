@@ -1,21 +1,73 @@
 <template>
   <main class="main container">
     <section class="user">
-      <div id="info-user" class="user__info">
+      <div v-if="!user.address" class="user__info">
         <span>Clique em Connect Wallet para mostrar os dados...</span>
       </div>
+      <div v-else class="user__info">
+        <p>
+          Adress: <span>{{ user.address }}</span>
+        </p>
+        <p>
+          PublicKey: <span>{{ user.publicKey }}</span>
+        </p>
+      </div>
     </section>
-    <button id="connect-wallet" class="button">
-      Connect Wallet
+    <button class="button" @click="handleClickConnectWallet">
+      Conectar Carteira
       <i class="bi bi-wallet"></i>
     </button>
-    <button id="invokeScript" class="button">invokeScript</button>
+    <button class="button" @click="handleClickGenerateScript" :disabled="!user.publicKey">
+      Chamar Contrato
+    </button>
   </main>
 </template>
 
 <script>
+import { reactive, onBeforeMount } from 'vue'
+import { loginToWaves, callTransaction } from '@/utils/signerWaves'
+import { generateScriptWavesTransaction } from '@/utils/generateScript'
+
 export default {
-  name: 'ContentComponent'
+  name: 'ContentComponent',
+  setup() {
+    const user = reactive({
+      address: null,
+      publicKey: null
+    })
+
+    async function handleClickConnectWallet() {
+      const data = await loginToWaves()
+      if (!data) {
+        alert('Ocorreu um erro ao realizar a conexão com a Waves')
+      }
+      user.address = data.address
+      user.publicKey = data.publicKey
+    }
+
+    function handleClickGenerateScript() {
+      const data = generateScriptWavesTransaction(user.publicKey)
+
+      handleTransaction(data)
+    }
+
+    function handleTransaction(dataGeneratedScript) {
+      callTransaction(dataGeneratedScript)
+    }
+
+    onBeforeMount(() => {
+      getBTC()
+    })
+
+    async function getBTC() {
+      fetch(
+        'https://api.nomics.com/v1/currencies/ticker?key=your-key-here&ids=BTC,ETH,XRP&interval=1d,30d&convert=USD&platform-currency=BTC&per-page=100&page=1'
+      )
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+    }
+    return { user, handleClickConnectWallet, handleClickGenerateScript, handleTransaction, getBTC }
+  }
 }
 </script>
 
@@ -70,5 +122,13 @@ export default {
 
 .main .button i {
   margin-left: 1rem;
+}
+
+.main .button:disabled {
+  background-color: var(--gray-500);
+}
+.main .button:hover:disabled {
+  cursor: inherit;
+  filter: inherit;
 }
 </style>

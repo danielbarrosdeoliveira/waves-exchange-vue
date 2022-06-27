@@ -1,8 +1,7 @@
 <template>
   <footer class="footer">
     <p>
-      <span id="actual-year"></span>
-      &nbsp;-&nbsp;
+      {{ new Date().getFullYear() }} -&nbsp;
       <a href="https://github.com/danielbarrosdeoliveira" target="_blank"> Daniel Oliveira </a>
     </p>
   </footer>

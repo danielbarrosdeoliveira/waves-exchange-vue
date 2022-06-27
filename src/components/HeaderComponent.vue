@@ -1,9 +1,7 @@
 <template>
   <header class="header">
     <nav class="header__nav container">
-      <a href="https://github.com/danielbarrosdeoliveira" target="_blank">
-        <img src="@/assets/img/logo-light.png" alt="Logo Daniel Oliveira" class="logo-daniel" />
-      </a>
+      <img src="@/assets/img/logo-light.png" alt="Logo Daniel Oliveira" class="logo-daniel" />
       <ul>
         <li>
           <a target="_blank" href="https://www.tecmundo.com.br/nft">O que é NFT?</a>
