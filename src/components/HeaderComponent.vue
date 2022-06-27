@@ -38,7 +38,7 @@ export default {
 
     async function getPriceETH() {
       fetch(
-        'https://api.nomics.com/v1/currencies/ticker?key=4abbb7e7592df4f53bb67052d7ec165d4cf677f2&ids=BTC,ETH,XRP&interval=1h&convert=EUR&platform-currency=ETH&per-page=100&page=1'
+        'https://api.nomics.com/v1/currencies/ticker?key=4abbb7e7592df4f53bb67052d7ec165d4cf677f2&ids=BTC,ETH,XRP&interval=1h&convert=USD&platform-currency=ETH&per-page=10&page=1'
       )
         .then((response) => response.json())
         .then((data) => {
