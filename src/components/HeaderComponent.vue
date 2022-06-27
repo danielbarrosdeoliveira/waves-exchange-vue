@@ -6,10 +6,12 @@
       </a>
       <ul>
         <li>
-          <a href="#">Features</a>
+          <a target="_blank" href="https://www.tecmundo.com.br/nft">O que é NFT?</a>
         </li>
         <li>
-          <a href="#">Pricing</a>
+          <a target="_blank" href="https://www.ibm.com/br-pt/topics/what-is-blockchain">
+            O que é Blockchain?
+          </a>
         </li>
       </ul>
     </nav>
@@ -22,7 +24,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .header {
   background: var(--background);
 }
