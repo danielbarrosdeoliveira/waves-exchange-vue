@@ -1,0 +1,38 @@
+:root {
+  --background: #222222;
+  --white: #e8e8e8;
+  --blue-100: #127296;
+  --blue-200: #1e41d6;
+  --blue-500: #172e8a;
+  --blue-800: #040f3d;
+  --gray-700: #617a69;
+  --gray-500: #758173;
+  --red: #bf1304;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+ul,
+li,
+a {
+  list-style: none;
+  text-decoration: none;
+}
+
+.container {
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.error {
+  color: var(--red);
+}
