@@ -2,7 +2,7 @@
   <header class="header">
     <nav class="header__nav container">
       <img src="@/assets/img/logo-light.png" alt="Logo Daniel Oliveira" class="logo-daniel" />
-      <span v-show="ethereum.price">Agora, Ethereum {{ ethereumFormated }}<sup>USD</sup> </span>
+      <span v-show="bitcoin.price">Agora, Bitcoin {{ bitcoinUseFormated }}<sup>USD</sup> </span>
       <ul>
         <li>
           <a target="_blank" href="https://www.tecmundo.com.br/nft">O que é NFT?</a>
@@ -25,28 +25,26 @@ export default {
   name: 'HeaderComponent',
   setup() {
     onBeforeMount(() => {
-      getPriceETH()
+      getPriceBTC()
     })
 
-    const ethereum = reactive({
+    const bitcoin = reactive({
       price: null
     })
 
-    const ethereumFormated = computed(() => {
-      return Number(ethereum.price).toFixed('2')
+    const bitcoinUseFormated = computed(() => {
+      return Number(bitcoin.price).toFixed('2')
     })
 
-    async function getPriceETH() {
-      fetch(
-        'https://api.nomics.com/v1/currencies/ticker?key=4abbb7e7592df4f53bb67052d7ec165d4cf677f2&ids=BTC,ETH,XRP&interval=1h&convert=USD&platform-currency=ETH&per-page=10&page=1'
-      )
+    async function getPriceBTC() {
+      fetch('https://api.coincap.io/v2/assets/bitcoin')
         .then((response) => response.json())
         .then((data) => {
-          ethereum.price = data[0].price
+          bitcoin.price = data.data.priceUsd
         })
     }
 
-    return { getPriceETH, ethereum, ethereumFormated }
+    return { getPriceBTC, bitcoin, bitcoinUseFormated }
   }
 }
 </script>
